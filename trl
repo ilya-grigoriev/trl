@@ -1,0 +1,43 @@
+#!/usr/bin/env perl
+use strict;
+use warnings;
+
+use lib "./";
+use Request;
+use Args;
+
+Args::check_args();
+
+my ($cookie_yu, $cookie_sprvk) = Request::get_cookies();
+
+my $request = Request::request_get_translating(Args::format_text($Args::text_request), $cookie_yu, $cookie_sprvk);
+if ($request =~ /"type": "captcha"/) {
+	print "too many requests\n";
+	exit(1);
+}
+elsif ($request =~ m/Connection timed out/) {
+	print "problem with connection\n";
+	exit(1);
+}
+
+if ($request =~ /"text":"((?:(?!(")).)*)"/) {
+	print "$Args::text_request -> $1\n";
+}
+else {
+# 	print "no variants of translating\n";
+# 	print "maybe you mean:\n";
+# 	$r = Request::request_complete_translating($Args::text_request);
+# 	if ($r =~ m/Connection timed out/) {
+# 		print "problem with connection\n";
+# 		exit(1);
+# 	}
+# 	else {
+# 		if ($r =~ m/\"text\":\[((?:(?!(\[)).)*)\]/) {
+# 			my $list_complete_words = $1;
+# 			while ($list_complete_words =~ /\"((?:(?!(\")).)*)\"/g) {
+# 				print "$1\n";
+# 			}
+# 		}
+# 	}
+	print "$request\n";
+}
