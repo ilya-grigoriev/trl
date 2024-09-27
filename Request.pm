@@ -6,7 +6,6 @@ sub request_get_translating {
 	my $cookie_sprvk = shift;
 	my $uuid = `uuidgen -t | tr -d - | tr -d "\n"`;
 
-# return `curl -s -m 3 'https://dictionary.yandex.net/dicservice.json/queryCorpus?srv=tr-text&ui=ru&src=$text&lang=en-ru&flags=1063&options=226&chunks=1&maxlen=200&v=2&' | jq -r '.result.tabs[].translation.text' 2>&1`;
 	return `curl -s -m 3 'https://translate.yandex.net/api/v1/tr.json/translate?id=$uuid-0-0&srv=tr-text&source_lang=en&target_lang=ru&reason=cut&format=text&strategy=0&disable_cache=false&ajax=1&yu=$cookie_yu&sprvk=$cookie_sprvk%3D' \\
 	-H 'accept: */*' \\
 	-H 'accept-language: en-US,en;q=0.9' \\
