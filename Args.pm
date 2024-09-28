@@ -2,17 +2,18 @@ package Args;
 
 our $text_request;
 our @langs = ("en", "ru");
-my $is_examples = 0;
+our $is_examples = 0;
+our $no_colors = 0;
 
 sub check_args {
     my $ind = 0;
 	foreach (@ARGV) {
-		if ($_ eq "-e") {
-			$is_examples = 1;
-		}
-        elsif ($_ eq "-pl" || $_ eq "--print-langs") {
+        if ($_ eq "-pl" || $_ eq "--print-langs") {
             Request::print_supported_languages();
             exit(0);
+        }
+        elsif ($_ eq "-nc" || $_ eq "--no-colors") {
+            $no_colors = 1;
         }
         elsif ($_ eq "--lang" || $_ eq "-l") {
             @langs = split(/-/, $ARGV[$ind + 1]);
@@ -20,6 +21,9 @@ sub check_args {
                 print STDERR "problem with setting languages\n";
                 exit(1);
             }
+        }
+        elsif ($_ eq "--examples" || $_ eq "-e") {
+            $is_examples = 1;
         }
 		else {
 			$text_request = $_;
