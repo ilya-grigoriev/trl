@@ -8,9 +8,9 @@ use Args;
 
 Args::check_args();
 
-my ($cookie_yu, $cookie_sprvk) = Request::get_cookies();
+my @cookies = Request::get_cookies();
 
-my $request = Request::request_get_translating(Args::format_text($Args::text_request), $cookie_yu, $cookie_sprvk);
+my $request = Request::request_get_translating(Args::format_text($Args::text_request), @cookies);
 if ($request =~ /"type": "captcha"/) {
 	print "too many requests\n";
 	exit(1);
