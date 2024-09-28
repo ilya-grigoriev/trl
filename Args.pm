@@ -9,10 +9,10 @@ sub check_args {
     my $ind = 0;
 	foreach (@ARGV) {
         if ($_ eq "-h" || $_ eq "--help") {
-            print "trl [-e] [--examples] [-nc] [--no-colors] [-l] [--langs] text\n";
+            print "trl [-e] [--examples] [-nc] [--no-colors] [-l] [--langs] [-pl] [--print-langs] text\n";
             exit(0);
         }
-        if ($_ eq "-pl" || $_ eq "--print-langs") {
+        elsif ($_ eq "-pl" || $_ eq "--print-langs") {
             Request::print_supported_languages();
             exit(0);
         }
