@@ -8,6 +8,10 @@ our $no_colors = 0;
 sub check_args {
     my $ind = 0;
 	foreach (@ARGV) {
+        if ($_ eq "-h" || $_ eq "--help") {
+            print "trl [-e] [--examples] [-nc] [--no-colors] [-l] [--langs] text\n";
+            exit(0);
+        }
         if ($_ eq "-pl" || $_ eq "--print-langs") {
             Request::print_supported_languages();
             exit(0);
@@ -15,7 +19,7 @@ sub check_args {
         elsif ($_ eq "-nc" || $_ eq "--no-colors") {
             $no_colors = 1;
         }
-        elsif ($_ eq "--lang" || $_ eq "-l") {
+        elsif ($_ eq "--langs" || $_ eq "-l") {
             @langs = split(/-/, $ARGV[$ind + 1]);
             if (@langs[0] eq "" || @langs[1] eq "") {
                 print STDERR "problem with setting languages\n";
