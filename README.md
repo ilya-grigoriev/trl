@@ -5,13 +5,10 @@
 # Installation
 
 For compiling `trl` you need to [pp](https://metacpan.org/pod/pp). You can install it with your package manager.
-```
-pp -o trl trl.pl
-```
 
-Then copy executable file to `bin` folder:
+Then just enter following command:
 ```
-cp trl /usr/bin
+make
 ```
 
 # Other
