@@ -1,0 +1,60 @@
+.TH trl 1
+
+.SH NAME
+.B trl
+- translating text with Yandex Translate API.
+
+.SH SYNOPSIS
+trl [-e] [--examples] [-nc] [--no-colors] [-l] [--langs] text
+
+.SH DESCRIPTION
+.B trl
+help you work with Yandex Translate API from terminal.
+
+.SH OPTIONS
+.SS
+
+.TP
+.B -e, --examples
+printing examples (with colors) from some sources
+
+.TP
+\fB-l, --langs\fI source-target
+using language codes like
+.IB en-de
+.IB (en-ru
+by default); see
+.B --print-langs
+
+.TP
+.B -pl, --print-langs
+printing languages with their codes
+
+.TP
+.B -nc, --no-colors
+print examples without colors
+
+.TP
+.B -h, --help
+
+.SH EXAMPLES
+.SS
+.TP
+If you want to change languages for translating (for example, English to German):
+.B trl -l en-de hi
+
+.TP
+If you want to translate long text, then enclose it in quotation marks:
+.B
+trl "hi. how are you?"
+
+.TP
+If you want to get examples for text with translating:
+.B
+trl -e "Scooby Doo"
+
+.SH AUTHOR
+Ilya Grigoriev
+
+.SH COPYRIGHT
+See the LICENSE file for the terms of redistribution.
