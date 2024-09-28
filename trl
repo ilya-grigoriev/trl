@@ -21,7 +21,9 @@ elsif ($request =~ m/Connection timed out/) {
 }
 
 if ($request =~ /"text":\["((?:(?!(")).)*)"\]/) {
+    print "\n";
 	print "$Args::text_request -> $1\n";
+    print "\n";
 }
 else {
 	print "$request\n";

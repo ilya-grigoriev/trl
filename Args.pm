@@ -14,7 +14,7 @@ sub check_args {
             Request::print_supported_languages();
             exit(0);
         }
-        elsif ($_ eq "--lang") {
+        elsif ($_ eq "--lang" || $_ eq "-l") {
             @langs = split(/-/, $ARGV[$ind + 1]);
             if (@langs[0] eq "" || @langs[1] eq "") {
                 print STDERR "problem with setting languages\n";
