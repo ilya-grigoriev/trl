@@ -8,7 +8,7 @@ For compiling `trl` you need to [pp](https://metacpan.org/pod/pp). You can insta
 
 Then just enter following command:
 ```
-make
+make install
 ```
 
 # Other
