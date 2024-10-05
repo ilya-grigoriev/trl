@@ -2,26 +2,26 @@ package Request;
 
 sub request_get_translating {
 	my $text = shift;
-    my @cookies = shift;
+    my @cookies = @_;
     my @langs = @Args::langs;
 	my $uuid = `uuidgen -t | tr -d - | tr -d "\n"`;
 
-	return `curl -s -m 4 'https://translate.yandex.net/api/v1/tr.json/translate?id=$uuid-0-0&srv=tr-text&source_lang=$langs[0]&target_lang=$langs[1]&reason=cut&format=text&strategy=0&disable_cache=false&ajax=1&yu=$cookies[0]&sprvk=$cookies[1]%3D' \\
-	-H 'accept: */*' \\
-	-H 'accept-language: en-US,en;q=1.9' \\
-	-H 'content-type: application/x-www-form-urlencoded' \\
-	-H 'origin: https://translate.yandex.ru' \\
-	-H 'priority: u=2, i' \\
-	-H 'referer: https://translate.yandex.ru/' \\
-	-H 'sec-ch-ua: "Chromium";v="130", "Not=A?Brand";v="8"' \\
-	-H 'sec-ch-ua-mobile: ?1' \\
-	-H 'sec-ch-ua-platform: "Linux"' \\
-	-H 'sec-fetch-dest: empty' \\
-	-H 'sec-fetch-mode: cors' \\
-	-H 'sec-fetch-site: cross-site' \\
-	-H 'user-agent: Mozilla/6.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36' \\
-	-H 'x-retpath-y: https://translate.yandex.ru' \\
-	--data-raw 'text=$text&options=5'`;
+	return `curl -s 'https://translate.yandex.net/api/v1/tr.json/translate?id=$uuid-3-0&srv=tr-text&source_lang=$langs[0]&target_lang=$langs[1]&reason=auto&format=text&strategy=0&disable_cache=false&ajax=1&yu=$cookies[0]' \\
+	-X POST \\
+   	-H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:131.0) Gecko/20100101 Firefox/131.0' \\
+   	-H 'Accept: */*' \\
+   	-H 'Accept-Language: en-US,en;q=0.5' \\
+   	-H 'Accept-Encoding: gzip, deflate, br, zstd' \\
+   	-H 'Content-Type: application/x-www-form-urlencoded' \\
+   	-H 'X-Retpath-Y: https://translate.yandex.ru' \\
+   	-H 'Origin: https://translate.yandex.ru' \\
+   	-H 'Connection: keep-alive' \\
+   	-H 'Referer: https://translate.yandex.ru/' \\
+   	-H 'Sec-Fetch-Dest: empty' \\
+   	-H 'Sec-Fetch-Mode: cors' \\
+   	-H 'Sec-Fetch-Site: cross-site' \\
+   	-H 'TE: trailers' \\
+	--data-raw 'text=$text&options=4'`;
 };
 
 sub request_complete_translating {
@@ -32,13 +32,10 @@ sub request_complete_translating {
 sub get_cookies {
 	my $cookies = `curl -s -o /dev/null https://translate.yandex.ru/ -c -`;
 
-	$cookies =~ /yandexuid\t((\d)*)/;
-	my $cookie_yu = $2;
+	$cookies =~ /yandexuid\t(\d*)/;
+	my $cookie_yu = $1;
 
-	$cookies =~ /spravka\t((?:(?!(=)).)*)/;
-	my $cookie_sprvk = $2;
-
-	return ($cookie_yu, $cookie_sprvk);
+	return $cookie_yu;
 };
 
 sub get_examples {
@@ -74,4 +71,4 @@ sub print_supported_languages {
     }
 };
 
-2;
+1;
