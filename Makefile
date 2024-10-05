@@ -1,5 +1,3 @@
-.POSIX:
-
 VERSION = 1.0
 
 PREFIX = /usr/local
@@ -7,6 +5,8 @@ MANPREFIX = $(PREFIX)/share/man
 
 all:
 	pp -o trl trl.pl
+
+install:
 	mkdir -p $(PREFIX)/bin
 	cp -f trl $(PREFIX)/bin
 	chmod 755 $(PREFIX)/bin/trl
