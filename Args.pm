@@ -4,6 +4,7 @@ our $text_request;
 our @langs = ("en", "ru");
 our $is_examples = 0;
 our $no_colors = 0;
+our $in_live = 0;
 
 sub check_args {
     my $ind = 0;
@@ -19,6 +20,9 @@ sub check_args {
         elsif ($_ eq "-nc" || $_ eq "--no-colors") {
             $no_colors = 1;
         }
+		elsif ($_ eq "-il" || $_ eq "--in-live") {
+			$in_live = 1;
+		}
         elsif ($_ eq "--langs" || $_ eq "-l") {
             @langs = split(/-/, $ARGV[$ind + 1]);
             if (@langs[0] eq "" || @langs[1] eq "") {
@@ -36,17 +40,15 @@ sub check_args {
         $ind++;
 	}
 
-	if ($text_request eq "") {
+	if ($text_request eq "" && $in_live == 0) {
 		print STDERR "no text input\n";
 		exit(1);
 	}
+
+	if ($in_live == 1) {
+		print "start translating:\n";
+	}
 };
 
-sub format_text {
-	my $text = shift;
-	$Args::text =~ s/\n//g;
-	$Args::text =~ s/ /%20/g;
-	return $text;
-};
 
 1;
