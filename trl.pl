@@ -23,14 +23,12 @@ sub translate {
 
 	my $request = Request::request_get_translating(Text::format_text($text, "request"), @cookies);
 	if ($request =~ /"type": "captcha"/) {
-		my $message = "too many requests\n";
-		if ($Args::in_live == 1) {
-			print "\n".$message;
-		}
-		else {
-			print $message;
+		if ($Args::in_live == 0) {
+			print "too many requests\n";
 			exit(1);
 		}
+
+		print "\ntoo many requests\n\n";
 	}
 	elsif ($request =~ m/Connection timed out/) {
 		if ($Args::in_live == 1) {
@@ -39,8 +37,7 @@ sub translate {
 		print "problem with connection\n";
 		exit(1);
 	}
-
-	if ($request =~ /"text":\["((?:(?!(")).)*)"\]/) {
+	elsif ($request =~ /"text":\["((?:(?!(")).)*)"\]/) {
 		if ($Args::in_live == 0) {
 			print "$Args::text_request -> $1\n";
 		}
