@@ -1,11 +1,11 @@
 .TH trl 1
 
 .SH NAME
-.B trl
-- tool for translating text with Yandex Translate API.
+trl \- command line translation tool
 
 .SH SYNOPSIS
-trl [-e] [--examples] [-nc] [--no-colors] [-l] [--langs] [-pl] [--print-langs] text
+.B trl
+[\fIOPTIONS\fR] \fItext\fR
 
 .SH DESCRIPTION
 .B trl
@@ -35,6 +35,10 @@ printing languages with their codes
 print examples without colors
 
 .TP
+.B -il, --in-live
+enable live translation mode
+
+.TP
 .B -h, --help
 
 .SH EXAMPLES
@@ -54,7 +58,7 @@ If you want to get examples for text with translating:
 trl -e "Scooby Doo"
 
 .SH AUTHOR
-Ilya Grigoriev
+Written by Ilya Grigoryev
 
 .SH COPYRIGHT
 See the LICENSE file for the terms of redistribution.
