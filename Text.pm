@@ -1,5 +1,6 @@
 package Text;
-
+use utf8;
+use Encode;
 sub move_previous_line {
 	print "\033[1F";
 };
@@ -14,7 +15,7 @@ sub move_end_of_line {
 sub get_input {
 	my $text = <STDIN>;
 	move_previous_line();
-	move_end_of_line(length($text));
+	move_end_of_line(length(decode("UTF-8", $text)));
 	return $text;
 };
 
