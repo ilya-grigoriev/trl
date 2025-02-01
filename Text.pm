@@ -1,6 +1,7 @@
 package Text;
 use utf8;
 use Encode;
+
 sub move_previous_line {
 	print "\033[1F";
 };
