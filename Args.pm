@@ -53,14 +53,7 @@ sub check_args {
 }
 
 sub print_usage {
-    print "Usage: trl [OPTIONS] text\n";
-    print "Options:\n";
-    print "  -e, --examples     show examples\n";
-    print "  -nc, --no-colors   disable colored output\n";
-    print "  -l, --langs        specify languages (format: lang1-lang2)\n";
-    print "  -pl, --print-langs print supported languages\n";
-    print "  -il, --in-live     enable live translation mode\n";
-    print "  -h, --help         show this help message\n";
+    print "usage: trl [-e] [--examples] [-nc] [--no-colors] [-l <lang1>-<lang2>] [--langs <lang1>-<lang2>] [-pl] [--print-langs] [-il] [--in-live] [-h] [--help] text\n";
 }
 
 sub parse_languages {
