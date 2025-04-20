@@ -52,7 +52,7 @@ sub check_args {
             $is_examples = 1;
         }
         else {
-            $text_request = $_;
+            $text_request = join(' ', @ARGV);
         }
         $ind++;
     }
