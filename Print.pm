@@ -1,5 +1,10 @@
 package Print;
 
+use constant {
+    BOLD_START => "\033[1m",
+    BOLD_RESET => "\033[0m",
+};
+
 sub print_examples {
 	my @examples = Request::get_examples($Args::text_request);
 	foreach (@examples) {
@@ -22,14 +27,28 @@ sub print_examples {
 
 sub print_synonyms {
 	print "\n";
-	print "Synonyms:\n";
-	print Request::get_synonyms(Text::format_text(shift, "request"));
+
+	my $synonyms = Request::get_synonyms(Text::format_text(shift, "request"));
+	if ($synonyms eq "") {
+		print "no synonyms\n";
+	}
+	else {
+		print BOLD_START . "Synonyms:" . BOLD_RESET . "\n";
+		print $synonyms;
+	}
 }
 
 sub print_antonyms {
 	print "\n";
-	print "Antonyms:\n";
-	print Request::get_antonyms(Text::format_text(shift, "request"));
+
+	my $antonyms = Request::get_antonyms(Text::format_text(shift, "request"));
+	if ($antonyms eq "") {
+		print "no antonyms\n";
+	}
+	else {
+		print BOLD_START . "Antonyms:" . BOLD_RESET . "\n";
+		print $antonyms;
+	}
 }
 
 1;
