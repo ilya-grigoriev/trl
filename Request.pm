@@ -58,6 +58,46 @@ sub get_examples {
     -H 'user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36' | jq -r '.result.examples[] | [.dst, .src] | join("||")'`;
 }
 
+sub get_synonyms {
+	my $text = shift;
+    my @langs = @Args::langs;
+
+	return `curl -s 'https://dictionary.yandex.net/dicservice.json/lookupMultiple?srv=tr-text&text=$text&lang=$langs[0]-$langs[1]&flags=15783&dict=$langs[0].syn' \\
+	-H 'accept: */*' \\
+	-H 'accept-language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7' \\
+	-H 'dnt: 1' \\
+	-H 'origin: https://translate.yandex.ru' \\
+	-H 'priority: u=1, i' \\
+	-H 'sec-ch-ua: "Not?A_Brand";v="99", "Chromium";v="130"' \\
+	-H 'sec-ch-ua-mobile: ?0' \\
+	-H 'sec-ch-ua-platform: "Linux"' \\
+	-H 'sec-fetch-dest: empty' \\
+	-H 'sec-fetch-mode: cors' \\
+	-H 'sec-fetch-site: cross-site' \\
+	-H 'sec-gpc: 1' \\
+	-H 'user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36' | jq -r '.$langs[0].syn[].tr[].text' | head -n 10`;
+}
+
+sub get_antonyms {
+	my $text = shift;
+    my @langs = @Args::langs;
+
+	return `curl -s 'https://dictionary.yandex.net/dicservice.json/lookupMultiple?srv=tr-text&text=$text&lang=$langs[0]-$langs[1]&flags=15783&dict=$langs[0].ant' \\
+	-H 'accept: */*' \\
+	-H 'accept-language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7' \\
+	-H 'dnt: 1' \\
+	-H 'origin: https://translate.yandex.ru' \\
+	-H 'priority: u=1, i' \\
+	-H 'sec-ch-ua: "Not?A_Brand";v="99", "Chromium";v="130"' \\
+	-H 'sec-ch-ua-mobile: ?0' \\
+	-H 'sec-ch-ua-platform: "Linux"' \\
+	-H 'sec-fetch-dest: empty' \\
+	-H 'sec-fetch-mode: cors' \\
+	-H 'sec-fetch-site: cross-site' \\
+	-H 'sec-gpc: 1' \\
+	-H 'user-agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36' | jq -r '.$langs[0].ant[].tr[].text' | head -n 10`;
+}
+
 sub print_supported_languages {
     my @langs = `curl -s https://www.loc.gov/standards/iso639-2/php/code_list.php | tr -d '\t\n\015' | grep -oP '<tr valign="top">(.*)<\/tr>'`;
     foreach (@langs) {

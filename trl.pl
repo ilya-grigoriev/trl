@@ -46,7 +46,15 @@ sub translate {
 		}
 
 		if ($Args::is_examples == 1) {
-			Print::print_examples();
+			Print::print_examples($text);
+		}
+
+		if ($Args::is_synonyms == 1) {
+			Print::print_synonyms($text);
+		}
+
+		if ($Args::is_antonyms == 1) {
+			Print::print_antonyms($text);
 		}
 	}
 	else {

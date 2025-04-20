@@ -20,4 +20,16 @@ sub print_examples {
 	}
 }
 
+sub print_synonyms {
+	print "\n";
+	print "Synonyms:\n";
+	print Request::get_synonyms(Text::format_text(shift, "request"));
+}
+
+sub print_antonyms {
+	print "\n";
+	print "Antonyms:\n";
+	print Request::get_antonyms(Text::format_text(shift, "request"));
+}
+
 1;

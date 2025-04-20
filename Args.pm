@@ -7,6 +7,8 @@ our @langs = ("en", "ru");
 our $is_examples = 0;
 our $no_colors = 0;
 our $in_live = 0;
+our $is_synonyms = 0;
+our $is_antonyms = 0;
 
 use constant {
     EXIT_SUCCESS => 0,
@@ -30,6 +32,12 @@ sub check_args {
             Request::print_supported_languages();
             exit(EXIT_SUCCESS);
         }
+		elsif ($_ eq "-syn") {
+			$is_synonyms = 1;
+		}
+		elsif ($_ eq "-ant") {
+			$is_antonyms = 1;
+		}
         elsif ($_ eq "-nc" || $_ eq "--no-colors") {
             $no_colors = 1;
         }
