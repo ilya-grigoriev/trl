@@ -61,7 +61,7 @@ sub check_args {
 }
 
 sub print_usage {
-    print "usage: trl [-e] [--examples] [-nc] [--no-colors] [-l <lang1>-<lang2>] [--langs <lang1>-<lang2>] [-pl] [--print-langs] [-il] [--in-live] [-h] [--help] text\n";
+    print "usage: trl [-e] [--examples] [-nc] [--no-colors] [-syn] [-ant] [-l <lang1>-<lang2>] [--langs <lang1>-<lang2>] [-pl] [--print-langs] [-il] [--in-live] [-h] [--help] text\n";
 }
 
 sub parse_languages {
