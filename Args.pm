@@ -52,7 +52,11 @@ sub check_args {
             $is_examples = 1;
         }
         else {
-            $text_request = join(' ', @ARGV);
+			my $len_text = scalar(@ARGV) - $ind;
+			my @args_text = @ARGV[$ind..scalar(@ARGV) - 1]; # minus for no to exceed limits of indexing
+            $text_request = join(' ', @args_text);
+
+			$ind += $len_text;
         }
         $ind++;
     }
