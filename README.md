@@ -1,3 +1,5 @@
+[![Build app](https://github.com/ilya-grigoriev/trl/actions/workflows/deploy.yaml/badge.svg)](https://github.com/ilya-grigoriev/trl/actions/workflows/deploy.yaml)
+
 # trl
 
 `trl` - tool for translating text with Yandex Translate API.
