@@ -1,0 +1,20 @@
+name: Build app
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '*.pm'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Set up Perl
+        uses: shogo82148/actions-setup-perl@v1
+      - name: Install PAR Packager
+        run: apt update && apt install libpar-packer-perl
+      - name: Build app
+        run: make install
